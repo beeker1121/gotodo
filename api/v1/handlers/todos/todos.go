@@ -220,7 +220,7 @@ func HandleGetTodo(ac *apictx.Context) http.HandlerFunc {
 			return
 		}
 
-		// Try to update this todo.
+		// Try to get this todo.
 		todo, err := ac.Services.Todos.GetByIDAndMemberID(id, member.ID)
 		if err == servtodos.ErrTodoNotFound {
 			errors.Default(ac.Logger, w, errors.New(http.StatusNotFound, "", err.Error()))
@@ -270,12 +270,10 @@ func HandlePost(ac *apictx.Context) http.HandlerFunc {
 
 		// Try to create a new todo.
 		todo, err := ac.Services.Todos.New(member.ID, &params)
-		if err != nil {
-			if pes, ok := err.(*serverrors.ParamErrors); ok {
-				errors.Params(ac.Logger, w, http.StatusBadRequest, pes)
-				return
-			}
-
+		if pes, ok := err.(*serverrors.ParamErrors); ok && err != nil {
+			errors.Params(ac.Logger, w, http.StatusBadRequest, pes)
+			return
+		} else if err != nil {
 			ac.Logger.Printf("todos.New() service error: %s\n", err)
 			errors.Default(ac.Logger, w, errors.ErrInternalServerError)
 			return
