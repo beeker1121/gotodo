@@ -34,7 +34,7 @@ We use concepts from SOA to handle the backend actions performed by various API 
 
 The interaction with our backend database, MySQL, is handled by the `database` package (or domain). This package has no other concerns other than creating, reading, updating, and deleting entries from the various tables of our database.
 
-The next higher level up is the `services` package. This handled implementing our core application logic using the `database` package to persist and pull what we need.
+The next higher level up is the `services` package. This handles implementing our core application logic using the `database` package to persist and pull what we need.
 
 Finally, our `api` domain uses the `services` package within the various endpoint handlers.
 
