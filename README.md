@@ -2,6 +2,9 @@
 
 Go Todo is an example todo application that implements an HTTP API using Go.
 
+> [!NOTE]
+> Please refer to the DDDStructure repository for a newer version of this project. In particular, branches in the DDDStructure project show different ways to share top level services.
+
 The goal of this project is to provide a barebones example of how to structure and build a naive, but production ready backend for a web application using Go.
 
 Accompanying this project is an article that goes in-depth on the project structure itself:
